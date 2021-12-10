@@ -13,6 +13,7 @@ import Login from './Login';
 import Signup from './Signup';
 import ForgotPass from './ForgotPass';
 import ResetPass from './ResetPass';
+import Home from './Home';
 
 function App() {
 	//State management
@@ -43,7 +44,7 @@ function App() {
 						SushMe
 					</h1>
 					<Switch>
-						<Route exact path='/'>
+						{/* <Route exact path='/'>
 							<Redirect
 								to={
 									loggedInUser
@@ -51,7 +52,12 @@ function App() {
 										: '/sign-in'
 								}
 							/>
-						</Route>
+						</Route> */}
+						<Route
+							exact
+							path='/'
+							component={Home}
+						></Route>
 						<Route
 							exact
 							path='/sign-in'
