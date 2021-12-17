@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 import Category from './Category';
 import Product from './Product';
-//import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 export default function Dashboard() {
 	useEffect(() => {

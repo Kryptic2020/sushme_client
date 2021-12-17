@@ -14,7 +14,7 @@ export default function Product() {
 	const [show, setShow] = useState(false);
 	const [modalUpdateProduct, setModalUpdateProduct] =
 		useState(false);
-	const [idState, setIdState] = useState();
+	const [idState, setIdState] = useState('');
 	const [productsState, setProductsState] = useState([]);
 	const [categories, setCategories] = useState([]);
 
@@ -81,7 +81,6 @@ export default function Product() {
 		products().then((data) => setProductsState(data));
 		categoryIndex().then((data) => {
 			setCategories(data);
-			console.log(data);
 		});
 	}, [show, idState, modalUpdateProduct]);
 

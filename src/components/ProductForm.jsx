@@ -12,10 +12,10 @@ export default function ProductForm({ closeModal, id }) {
 	const initialFormState = {
 		title: '',
 		description: '',
+		category_id:'',
 		category: '',
-		category_id: 31,
 		status: '',
-		price: 0,
+		price:'',
 		msg: '',
 	};
 	const [formState, setFormState] = useState(
@@ -56,7 +56,6 @@ export default function ProductForm({ closeModal, id }) {
 				category_id: 31,
 			})
 				.then((data) => {
-					console.log(data);
 					closeModal();
 				})
 				.catch((error) => console.log(error));
@@ -70,7 +69,7 @@ export default function ProductForm({ closeModal, id }) {
 		});
 		if (id) {
 			productShow(id).then((data) => {
-				setFormState(data); console.log(data);
+				setFormState(data); 
 			});
 		}
 	}, [id]);
@@ -122,11 +121,11 @@ export default function ProductForm({ closeModal, id }) {
 								category_id: e.target.value,
 							})
 						}
-					><option>{categories.length > 0 && categories.find(x => x.id == formState.category_id).name}</option>
+					><option>{formState.category_id && categories.length > 0 && categories.find(x => x.id == formState.category_id).name}</option>
 						{categories &&
-							categories.map((o) => (
+							categories.map((o,index) => (
 								<option
-									key={o.value}
+									key={index}
 									value={o.id}
 								>
 									{o.name}
@@ -145,9 +144,9 @@ export default function ProductForm({ closeModal, id }) {
 							})
 						}
 					><option></option>
-						{options.map((o) => (
+						{options.map((o, index) => (
 							<option
-								key={o}
+								key={index}
 								value={o}
 							>
 								{o}
