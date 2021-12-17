@@ -5,7 +5,6 @@ import {
 	BrowserRouter,
 	Route,
 	Switch,
-	Redirect,
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Nav from './NavigationBar';
@@ -14,6 +13,7 @@ import Signup from './Signup';
 import ForgotPass from './ForgotPass';
 import ResetPass from './ResetPass';
 import Home from './Home';
+import Dashboard from './Dashboard'
 
 function App() {
 	//State management
@@ -31,7 +31,7 @@ function App() {
 		initialState
 	);
 
-	const { loggedInUser, userEmail } = store;
+	const { userEmail } = store;
 
 	return (
 		<div>
@@ -77,6 +77,11 @@ function App() {
 							exact
 							path='/reset-pass/:token'
 							component={ResetPass}
+						></Route>
+						<Route
+							exact
+							path='/dashboard'
+							component={Dashboard}
 						></Route>						
 					</Switch>
 				</BrowserRouter>
