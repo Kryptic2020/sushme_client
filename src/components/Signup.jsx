@@ -8,6 +8,7 @@ import {
 import { useGlobalState } from '../utils/stateContext';
 import { Button, Form } from 'react-bootstrap';
 import { pattern } from '../utils/authValidation';
+import Nav from './NavigationBar';
 
 export default function Signup() {
 	//State management
@@ -76,7 +77,7 @@ export default function Signup() {
 							type: 'setUserEmail',
 							data: formState.email,
 						});
-						history.push('/');
+						history.push('/dashboard');
 					}
 				});
 			} else {
@@ -95,6 +96,7 @@ export default function Signup() {
 	}
 	return (
 		<>
+			<Nav/>
 			<Form className='container col-11 col-md-9 col-lg-4 bg-light my-5 p-5 rounded'>
 				<Form.Text className='text-danger'>
 					{formState.errors

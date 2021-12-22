@@ -7,6 +7,7 @@ import {
 } from '../services/authServices';
 import { useGlobalState } from '../utils/stateContext';
 import { Button, Form } from 'react-bootstrap';
+import Nav from './NavigationBar';
 
 export default function SignIn({ history }) {
 	//State management
@@ -64,13 +65,14 @@ export default function SignIn({ history }) {
 						type: 'setToken',
 						data: jwt,
 					});
-					history.push('/');
+					history.push('/dashboard');
 				}
 			})
 			.catch((error) => console.log(error));
 	}
 	return (
 		<>
+			<Nav/>
 			<Form className='container col-11 col-md-9 col-lg-4 bg-light my-5 p-5 rounded'>
 				<Form.Text className='text-danger'>
 					{formState.errors

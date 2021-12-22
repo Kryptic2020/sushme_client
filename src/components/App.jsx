@@ -5,9 +5,10 @@ import {
 	BrowserRouter,
 	Route,
 	Switch,
+	Redirect
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Nav from './NavigationBar';
+//import Nav from './NavigationBar';
 import Login from './Login';
 import Signup from './Signup';
 import ForgotPass from './ForgotPass';
@@ -31,7 +32,7 @@ function App() {
 		initialState
 	);
 
-	const { userEmail } = store;
+	const { userEmail,loggedInUser } = store;
 
 	return (
 		<div>
@@ -39,12 +40,12 @@ function App() {
 				value={{ store, dispatch, userEmail }}
 			>
 				<BrowserRouter>
-					<Nav />
+					{/* <Nav/>
 					<h1 className=' my-5 text-center'>
 						SushMe
-					</h1>
+					</h1> */}
 					<Switch>
-						{/* <Route exact path='/'>
+						<Route exact path='/adm'>
 							<Redirect
 								to={
 									loggedInUser
@@ -52,7 +53,7 @@ function App() {
 										: '/sign-in'
 								}
 							/>
-						</Route> */}
+						</Route>
 						<Route
 							exact
 							path='/'
@@ -78,11 +79,11 @@ function App() {
 							path='/reset-pass/:token'
 							component={ResetPass}
 						></Route>
-						<Route
+						{loggedInUser ? <Route
 							exact
 							path='/dashboard'
 							component={Dashboard}
-						></Route>						
+						></Route>	: null}					
 					</Switch>
 				</BrowserRouter>
 			</StateContext.Provider>

@@ -78,7 +78,7 @@ export default function Product() {
 	);
 
 	useEffect(() => {
-		products().then((data) => setProductsState(data));
+		products().then((data) => setProductsState(data.products));
 		categoryIndex().then((data) => {
 			setCategories(data);
 		});
@@ -96,19 +96,15 @@ export default function Product() {
 			{ModalCreateProduct}
 			{ModalUpdateProduct}
 
-			<h5
-				className='mx-5 bg-light rounded p-3 col-md-4'
-				onClick={handleModal}
-			>
-				{' '}
-				Product List
-			</h5>
+			<h3 className='m-5 text-white'>Product List</h3>
 			{productsState.length > 0 &&
 				productsState.map((el, index) => (
 					<div
 						key={index}
-						className='bg-light m-5 p-4 rounded'
+						className='bg-light m-5 rounded d-md-flex flex-row-reverse'
 					>
+						<div className='col-12 col-md-6 m-0 p-0'><img className='w-100 h100 m-0 p-0' src={el.picture} alt={el.title}/></div>
+						<div className='col-12 col-md-6 p-4'>
 						<p>Title: {el.title}</p>
 						<p>Description: {el.description}</p>
 						<p>Price: ${el.price}</p>
@@ -121,8 +117,9 @@ export default function Product() {
 										el.category_id
 								).name}
 						</p>
-						<p>Status: {el.status}</p>
-						<p>Pic:</p>
+							<p>Status: {el.status}</p>
+						
+						
 						<span className='p-3 border rounded'>
 							<CreateIcon
 								onClick={() => {
@@ -136,7 +133,8 @@ export default function Product() {
 									handleDelete(el.id);
 								}}
 							/>{' '}
-						</span>
+							</span>
+								</div>
 					</div>
 				))}
 		</div>
