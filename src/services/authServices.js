@@ -6,7 +6,6 @@ export async function signUp(data) {
 }
 export async function signIn(data) {
 	const response = await sushmeAPI.post('/api/auth/sign-in', data)
-	console.log(data)
 	return response.data
 }
 export async function signOut() {

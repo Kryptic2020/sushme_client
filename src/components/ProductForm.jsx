@@ -12,16 +12,18 @@ export default function ProductForm({ closeModal, id }) {
 	const initialFormState = {
 		title: '',
 		description: '',
-		category_id:'',
+		category_id: '',
 		category: '',
 		status: '',
-		price:'',
+		price: '',
 		msg: '',
+		picture:''
 	};
 	const [formState, setFormState] = useState(
 		initialFormState
 	);
 	const [categories, setCategories] = useState([]);
+	const [selectedFile, setSelectedFile] = useState(null);
 
 	//handle user input
 	function handleChange(e) {
@@ -31,30 +33,45 @@ export default function ProductForm({ closeModal, id }) {
 		});
 	}
 
+	// On file select (from the pop up)
+	const onFileChange = (event) => {
+		// Update the state
+		setSelectedFile(event.target.files[0]);
+	};
+
 	//handle user details update submission
 	function handleSubmit() {
+		// Create an object of formData
+		const formData = new FormData();
+
+		// Update the formData object
+
+		formData.append('title', formState.title);
+		formData.append(
+			'description',
+			formState.description
+		);
+		formData.append('price', formState.price);
+		formData.append('status', formState.status);
+		formData.append(
+			'category_id',
+			formState.category_id
+		);
+		if (selectedFile) {
+			formData.append('picture', selectedFile);
+		}
 		if (id) {
-			productUpdate({
-				id,
-				title: formState.title,
-				description: formState.description,
-				price: formState.price,
-				status: formState.status,
-				category_id: formState.category_id,
-			})
-				.then((data) => {
-					console.log(data);
+			formData.append('id', id);
+		}
+
+		if (id) {
+			productUpdate(formData)
+				.then(() => {
 					closeModal();
 				})
 				.catch((error) => console.log(error));
 		} else {
-			productCreate({
-				title: formState.title,
-				description: formState.description,
-				price: formState.price,
-				status: formState.status,
-				category_id: 31,
-			})
+			productCreate(formData)
 				.then((data) => {
 					closeModal();
 				})
@@ -69,7 +86,7 @@ export default function ProductForm({ closeModal, id }) {
 		});
 		if (id) {
 			productShow(id).then((data) => {
-				setFormState(data); 
+				setFormState(data.product);
 			});
 		}
 	}, [id]);
@@ -121,9 +138,18 @@ export default function ProductForm({ closeModal, id }) {
 								category_id: e.target.value,
 							})
 						}
-					><option>{formState.category_id && categories.length > 0 && categories.find(x => x.id == formState.category_id).name}</option>
+					>
+						<option>
+							{formState.category_id &&
+								categories.length > 0 &&
+								categories.find(
+									(x) =>
+										x.id ==
+										formState.category_id
+								).name}
+						</option>
 						{categories &&
-							categories.map((o,index) => (
+							categories.map((o, index) => (
 								<option
 									key={index}
 									value={o.id}
@@ -131,7 +157,7 @@ export default function ProductForm({ closeModal, id }) {
 									{o.name}
 								</option>
 							))}
-					</select>					
+					</select>
 				</div>
 				<div className='row col-10 p-0 my-2 mx-auto'>
 					<select
@@ -143,16 +169,14 @@ export default function ProductForm({ closeModal, id }) {
 								status: e.target.value,
 							})
 						}
-					><option></option>
+					>
+						<option></option>
 						{options.map((o, index) => (
-							<option
-								key={index}
-								value={o}
-							>
+							<option key={index} value={o}>
 								{o}
 							</option>
 						))}
-					</select>					
+					</select>
 				</div>
 				<div className='row col-10 p-0 my-2 mx-auto'>
 					<input
@@ -163,6 +187,13 @@ export default function ProductForm({ closeModal, id }) {
 						value={formState.price}
 						onChange={handleChange}
 					/>
+				</div>
+				<div className='row col-10 p-0 my-2 mx-auto'>
+					
+						<input
+							type='file'
+							onChange={onFileChange}
+						/>
 				</div>
 				<Form.Text className='text-muted mt-0 p-0'></Form.Text>
 				<Button
@@ -176,6 +207,12 @@ export default function ProductForm({ closeModal, id }) {
 				>
 					Submit
 				</Button>
+				{id ? (
+					<>
+						<h2>Current image</h2>
+						<img src={formState.picture} alt='any' />
+					</>
+				) : null}
 			</div>
 		</>
 	);
