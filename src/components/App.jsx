@@ -45,7 +45,7 @@ function App() {
 						SushMe
 					</h1> */}
 					<Switch>
-						<Route exact path='/adm'>
+						<Route path='/adm'>
 							<Redirect
 								to={
 									loggedInUser
