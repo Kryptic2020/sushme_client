@@ -8,13 +8,15 @@ import {
 	Redirect
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import Nav from './NavigationBar';
 import Login from './Login';
 import Signup from './Signup';
 import ForgotPass from './ForgotPass';
 import ResetPass from './ResetPass';
 import Home from './Home';
 import Dashboard from './Dashboard'
+import Header from './Header';
+import Footer from './Footer';
+import { Div } from './Styled';
 
 function App() {
 	//State management
@@ -35,15 +37,13 @@ function App() {
 	const { userEmail,loggedInUser } = store;
 
 	return (
-		<div>
+		<>
+		<Div>
 			<StateContext.Provider
 				value={{ store, dispatch, userEmail }}
 			>
 				<BrowserRouter>
-					{/* <Nav/>
-					<h1 className=' my-5 text-center'>
-						SushMe
-					</h1> */}
+					<Header />
 					<Switch>
 						<Route path='/adm'>
 							<Redirect
@@ -85,9 +85,13 @@ function App() {
 							component={Dashboard}
 						></Route>	: null}					
 					</Switch>
+					
 				</BrowserRouter>
 			</StateContext.Provider>
-		</div>
+			
+			</Div>
+			<Footer/>
+			</>
 	);
 }
 
