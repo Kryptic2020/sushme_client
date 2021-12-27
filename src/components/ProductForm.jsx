@@ -16,6 +16,7 @@ export default function ProductForm({ closeModal, id }) {
 		category: '',
 		status: '',
 		price: '',
+		quantity:'',
 		msg: '',
 		picture:''
 	};
@@ -52,6 +53,7 @@ export default function ProductForm({ closeModal, id }) {
 			formState.description
 		);
 		formData.append('price', formState.price);
+		formData.append('quantity', formState.quantity);
 		formData.append('status', formState.status);
 		formData.append(
 			'category_id',
@@ -189,6 +191,16 @@ export default function ProductForm({ closeModal, id }) {
 					/>
 				</div>
 				<div className='row col-10 p-0 my-2 mx-auto'>
+					<input
+						type='number'
+						name='quantity'
+						className='bg-light border height'
+						placeholder='Quantity'
+						value={formState.quantity}
+						onChange={handleChange}
+					/>
+				</div>
+				<div className='row col-10 p-0 my-2 mx-auto'>
 					
 						<input
 							type='file'
@@ -201,7 +213,8 @@ export default function ProductForm({ closeModal, id }) {
 					disabled={
 						!formState.price ||
 						!formState.title ||
-						!formState.description
+						!formState.description ||
+						!formState.quantity
 					}
 					onClick={handleSubmit}
 				>

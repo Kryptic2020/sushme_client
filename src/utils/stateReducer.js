@@ -1,33 +1,40 @@
-export default function reducer (state, action) {
-	switch(action.type) {
+export default function reducer(state, action) {
+	switch (action.type) {
 		case 'setLoggedInUser': {
 			return {
 				...state,
-				loggedInUser: action.data
-			}
+				loggedInUser: action.data,
+			};
 		}
-			case 'setUserId': {
+		case 'setUserId': {
 			return {
 				...state,
-				user_id: action.data
-			}
+				user_id: action.data,
+			};
 		}
 		case 'setUserEmail': {
 			return {
 				...state,
-				userEmail: action.data
-			}
-	  }
+				userEmail: action.data,
+			};
+		}
 		case 'setToken': {
 			return {
 				...state,
 				auth: {
 					...state.auth,
-					token: action.data
-				}
-			}
+					token: action.data,
+				},
+			};
+		}
+		case 'setBasket': {
+			return {
+				...state,
+				basket: action.data, 
+			};
 		}
 
-		default: return state
+		default:
+			return state;
 	}
 }

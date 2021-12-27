@@ -4,13 +4,14 @@ import hero from '../img/hero.png'
 import {Hero, Button, ImgTopSeller,BgVanilla} from'./Styled' 
 import { productsTopSeller } from '../services/productServices';
 import GoogleMaps from './GoogleMaps';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
 //Manage State
   const [topSellers,setTopSellers]= useState([])
 
 useEffect(() => {
-  productsTopSeller().then((data) => { setTopSellers(data.products)})
+  productsTopSeller().then((data) => { setTopSellers(data.products); console.log(data)})
 }, [])
   return (
     <div className='w-100'>      
@@ -18,13 +19,15 @@ useEffect(() => {
       <div className='d-flex flex-wrap col-12'>
         <h6 className='d-sm-none m-4'>Welcome to Sushme</h6>      
         <Hero src={hero}/>     
-        <Button className='d-block mx-auto my-4 d-sm-none'>PRE ORDER ONLINE</Button>
+        <Link className='d-block mx-auto my-4 d-sm-none' to="/menu">
+          <Button>PRE ORDER ONLINE</Button>
+        </Link>
         <section className='col-12 col-sm-6'>
           <h3 className='d-none d-sm-block m-4 my-lg-5'>Welcome to Sushme</h3>
           <p className='p-4 py-lg-5'>Order Online from Sushme Japanese Cuisine * 191 Adelaide St, Brisbane QLD 4000 * Online Menu * Takeaway * Secure Online Payments *</p>  
           <section className='d-none d-lg-block mx-4'>
             <h5>Top Sellers</h5>
-            {topSellers.length > 0 && topSellers.map((el, index) => (
+            {topSellers.length > 0 && topSellers.map((el, index) => (el != null ?
               <div className='d-flex rounded col-12 my-5' key={index}>
               <ImgTopSeller src={el.picture } alt={ el.title} />
                <div className='col d-flex flex-column justify-content-around'>
@@ -33,8 +36,7 @@ useEffect(() => {
                   <span className='mx-3'>Price: $ {Number(el.price)}</span>
                 </div>
                 
-              
-            </div>
+            </div>:null
             ))}
             
             </section>
@@ -42,7 +44,7 @@ useEffect(() => {
         <section className='d-lg-none col-11 mx-auto my-3'>
           <h5 className='m-3'>Top Sellers</h5>
           <div className='d-md-flex'>
-            {topSellers.length > 0 && topSellers.map((el, index) => (
+            {topSellers.length > 0 && topSellers.map((el, index) => (el != null ?
               <div className='d-flex col-12 rounded col-md-6 mx-auto my-3' key={index}>
               <ImgTopSeller src={el.picture } alt={ el.title} />
                 <div className='col d-flex flex-column justify-content-around'>
@@ -50,10 +52,9 @@ useEffect(() => {
                   <span className='mx-3'>{el.description}</span>
                   <span className='mx-3 text-bold'>Price: $ {Number(el.price)}</span>
                 </div>
-                </div>
-              
-            
-            ))}</div>
+                </div>:null
+            ))}
+          </div>
         </section>
         
       </div>  
@@ -61,7 +62,9 @@ useEffect(() => {
         <div className='col-sm-6 col-12 p-3'>
         <h5 className='text-bold text-center mt-5 text-muted'>MENUS</h5>
         <span className='d-block p-3 my-5 text-center'>Small Roll,Hoso Roll,Gunkan,Aburi,Nigiri,Hand Roll,Big Roll,Fusion Roll,Rice Paper,Sashimi,Side Dish,A La Cart,Salad,Dessert,Drink</span>
-          <Button className='d-block mx-auto my-4'>PRE ORDER ONLINE</Button>
+          <Link className='d-block mx-auto my-4 text-center' to="/menu">
+            <Button >PRE ORDER ONLINE</Button>
+          </Link>
         </div>
         <div className='col-sm-6 col-12 py-5 px-4 d-flex flex-column text-center'>
           <h5 className='text-bold m-3 text-muted'>ONLINE OPERATING HOURS</h5>

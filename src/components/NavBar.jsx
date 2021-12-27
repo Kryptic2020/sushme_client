@@ -2,11 +2,12 @@ import React from 'react';
 import { NavBarBox, WhiteBar, Button } from './Styled';
 import logo from '../img/logo.png';
 import StarIcon from '@mui/icons-material/Star';
+import { Link } from 'react-router-dom';
 
 export default function NavBar() {
 	return (
 		<NavBarBox>
-			<div className='h-100 d-flex align-items-center '>
+			<div className='h-100 d-flex align-items-center'>
 				<img
 					className='mx-3'
 					width='120px'
@@ -31,7 +32,9 @@ export default function NavBar() {
         <div className='d-none d-md-flex col justify-content-around'>
           <span className='my-auto'>HOME</span>
           <span className='my-auto'>MENU</span>
-          <Button>PRE ORDER ONLINE</Button>
+					<Link to="/menu">
+						<Button>PRE ORDER ONLINE</Button>
+					</Link>
         </div>
 			</div>
 		</NavBarBox>

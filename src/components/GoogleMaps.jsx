@@ -16,7 +16,7 @@ export default function GoogleMaps() {
       position={{ lat: -27.468431, lng: 153.024949 }}
     />
   </GoogleMap>
-));console.log(process.env.REACT_APP_GOOGLE_KEY)
+))
   return (
     <div>
       <MapWithAMarker

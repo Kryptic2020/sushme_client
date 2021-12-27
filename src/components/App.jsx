@@ -17,10 +17,12 @@ import Dashboard from './Dashboard'
 import Header from './Header';
 import Footer from './Footer';
 import { Div } from './Styled';
+import Menu from './Menu';
 
 function App() {
 	//State management
 	const initialState = {
+		basket:[],
 		user_id: sessionStorage.getItem('userId') || null,
 		userEmail: sessionStorage.getItem('email') || null,
 		loggedInUser:
@@ -58,6 +60,11 @@ function App() {
 							exact
 							path='/'
 							component={Home}
+							></Route>
+							<Route
+							exact
+							path='/menu'
+							component={Menu}
 						></Route>
 						<Route
 							exact
