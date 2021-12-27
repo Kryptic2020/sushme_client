@@ -101,7 +101,7 @@ export default function Product() {
 				productsState.map((el, index) => (
 					<div
 						key={index}
-						className='bg-light m-5 rounded d-md-flex flex-row-reverse'
+						className='col col-lg-6 bg-light m-5 rounded d-md-flex flex-row-reverse'
 					>
 						<div className='col-12 col-md-6 m-0 p-0'><img className='w-100 h100 m-0 p-0' src={el.picture} alt={el.title}/></div>
 						<div className='col-12 col-md-6 p-4'>
@@ -118,6 +118,7 @@ export default function Product() {
 								).name}
 						</p>
 							<p>Status: {el.status}</p>
+							<p className='py-3'>Quantity: {el.quantity}</p>
 						
 						
 						<span className='p-3 border rounded'>
