@@ -2,7 +2,7 @@ import React,{useEffect} from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useGlobalState } from '../utils/stateContext';
 
-export default function BasketItem() {  
+export default function BasketItem({deleteIcon}) {  
   const {store, dispatch } = useGlobalState();
   const { basket } = store;
   let updatedItems = null;
@@ -22,8 +22,10 @@ export default function BasketItem() {
       {basket.length > 0 && basket.map((el, index) => (
         <div className='d-flex border my-2 justify-content-between p-2 text-center' key={index}>
           <div className='col-2'>X {el.quantity}</div>
-          <div className='col-2'>{el.title}</div>
-          <DeleteIcon onClick={()=>deleteHandler(el.id)}/>
+          <div className='col-2 text-capitalize'>{el.title}</div>
+          
+          { deleteIcon ?
+          <DeleteIcon onClick={()=>deleteHandler(el.id)}/>:null}
           <div className='col-2'>$ {el.price * el.quantity}</div>
           
         </div>

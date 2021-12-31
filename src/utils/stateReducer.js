@@ -18,6 +18,12 @@ export default function reducer(state, action) {
 				userEmail: action.data,
 			};
 		}
+			case 'setPickupTime': {
+			return {
+				...state,
+				pickupTime: action.data,
+			};
+		}
 		case 'setToken': {
 			return {
 				...state,

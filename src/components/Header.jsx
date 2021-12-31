@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { HeaderBox } from './Styled';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
@@ -60,7 +61,7 @@ export default function Header() {
     <div>
       <HeaderBox>
         <span>EN | JP</span>
-        <span>We are open!</span>
+        <Link className='text-decoration-none text-white' to='/'><span>We are open!</span></Link>
          <Stack direction="row" spacing={2} alignItems="center">
         {/* <Typography>Dark</Typography> */}
         <AntSwitch onChange={handleSwitchChange} checked={active} inputProps={{ 'aria-label': 'ant design' }} />

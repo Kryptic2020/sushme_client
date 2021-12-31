@@ -44,7 +44,7 @@ export default function Category() {
 	return (
 		<div>
 			<h5
-				className='m-5 bg-light rounded p-3 col-md-4'
+				className='mx-5 my-3 bg-white rounded p-3'
 				onClick={handleModal}
 			>
 				<BuildIcon /> Manage Category

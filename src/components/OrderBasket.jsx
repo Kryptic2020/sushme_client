@@ -11,8 +11,8 @@ import { useGlobalState } from '../utils/stateContext';
 //import { el } from 'date-fns/locale';
 
 export default function OrderBasket() {
-	const {store } = useGlobalState();
-  const { basket } = store;
+	const {store, dispatch } = useGlobalState();
+  const { basket,pickupTime } = store;
 	const [time, setTime] = useState(null);
   
 	function total() {
@@ -21,14 +21,22 @@ export default function OrderBasket() {
 		return sum
 	}
 
+	function handlePickupTime(data) {
+		setTime(data);
+		dispatch({
+			type: 'setPickupTime',
+			data:time
+		})
+	}
+
 
 	return (
 		<div className='my-5'>
 			<h3 className='m-4'>ORDER BASKET</h3>
 			<h6 className='text-center'>
-				Preorder for {time ? time.toLocaleString() : '11:00 AM'}.
+				Preorder for {time ? time.toLocaleString() : ''}
 			</h6>
-			<h6 className='text-center text-danger fw-bold'>
+			<h6 className='text-center text-danger fw-bold my-5'>
 				PICKUP ONLY
 			</h6>
 			<h6 className='mx-4 my-3'>Pickup Time</h6>
@@ -44,7 +52,7 @@ export default function OrderBasket() {
 							//maxTime={new Date(0, 0, 0, 18, 45)}
 							//disableIgnoringDatePartForTimeValidation={true}
 							onChange={(data) => {
-								setTime(data);
+								handlePickupTime(data);
 							}}
 							renderInput={(params) => (
 								<TextField {...params} />
@@ -53,15 +61,15 @@ export default function OrderBasket() {
 					</Stack>
 				</LocalizationProvider>
 
-				<BasketItem />
+				<BasketItem deleteIcon={true}/>
 				<div className='my-3'>
 					Order Total $ {Number(total()).toFixed(2)}
 				</div>
 				<Link
 					className='d-block mx-auto my-4 text-center'
-					to='/menu'
+					to={pickupTime ? '/checkout':'/Menu'}
 				>
-					<Button>ORDER FOR PICKUP NOW</Button>
+					<Button className='btn btn-lg text-white' disabled={!pickupTime}>ORDER FOR PICKUP NOW!</Button>
 				</Link>
 			</div>
 		</div>
