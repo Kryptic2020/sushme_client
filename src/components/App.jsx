@@ -29,7 +29,7 @@ function App() {
 	const initialState = {
 		basket: [],
 		pickupTime: null,
-		table_number: 2,
+		table_number: null,
 		user_id: sessionStorage.getItem('userId') || null,
 		userEmail: sessionStorage.getItem('email') || null,
 		loggedInUser:
