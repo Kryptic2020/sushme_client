@@ -5,6 +5,8 @@ import { useGlobalState } from '../utils/stateContext';
 import { pattern } from '../utils/authValidation';
 import { order } from '../services/paymentServices';
 import { Button } from './Styled';
+import Spin from './Spin'
+
 import locked from '../img/locked.png';
 
 export default function Contact() {
@@ -23,6 +25,7 @@ export default function Contact() {
 	const [formState, setFormState] = useState(
 		initialFormState
 	);
+	const [spinner, setSpinner] = useState(false)
 
 	const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
 	
@@ -37,6 +40,7 @@ export default function Contact() {
 	}
 
 	async function handleCkeckout() {
+		setSpinner(true);
 		const stripe = await stripePromise;
 		order(formState).then((data) => {
 			stripe.redirectToCheckout({
@@ -48,7 +52,7 @@ export default function Contact() {
 	// Loads user details
 
 	return (
-		<div className='col-12 col-md-6'>
+		<div className='col-12 col-md-6'>{spinner ? <Spin/>:null}
 			<div className='rounded mb-5 mx-auto py-5  d-flex flex-wrap row'>
 				<h3 className='rounded p-2 mx-3 my-3'>
 					CONTACT INFO

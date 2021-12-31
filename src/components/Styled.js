@@ -1,5 +1,12 @@
 
 import styled from 'styled-components';
+export const Spin = styled.div`
+position:absolute;
+height:100vh;
+width:10vw;
+background-color:rgb(255,255,255,0.3);
+z-index:300;
+`
 
 export const ImgMenuHero = styled.img`
 position:relative;
