@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 import Category from './Category';
 import Nav from './NavigationBar';
-import Order from './Order';
 import BuildIcon from '@mui/icons-material/Build';
 import { Link } from 'react-router-dom';
 

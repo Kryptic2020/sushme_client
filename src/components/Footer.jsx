@@ -1,14 +1,17 @@
 import React from 'react'
 import { FooterBox } from './Styled'
+import { useGlobalState } from '../utils/stateContext';
 import mastercard from '../img/mastercard.png'
 import visa from '../img/visa.png'
 
 export default function Footer() {
+  const { store } = useGlobalState();
+  const { table_number } = store;
   return (
     <FooterBox>
       <div className='row d-lg-flex'>
       <div className='d-flex flex-column flex-sm-row text-center col-lg-8 justify-content-around my-4 my-md-0'>
-        <span>Home</span>
+        {table_number ? null :<span>Home</span>}
         <span>Menu</span>
         <span>Privacy Policy</span>
         <span>Terms & Conditions</span>

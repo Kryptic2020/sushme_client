@@ -12,7 +12,7 @@ import { useGlobalState } from '../utils/stateContext';
 
 export default function OrderBasket() {
 	const {store, dispatch } = useGlobalState();
-  const { basket,pickupTime } = store;
+  const { basket,pickupTime, table_number } = store;
 	const [time, setTime] = useState(null);
   
 	function total() {
@@ -37,11 +37,11 @@ export default function OrderBasket() {
 				Preorder for {time ? time.toLocaleString() : ''}
 			</h6>
 			<h6 className='text-center text-danger fw-bold my-5'>
-				PICKUP ONLY
+				{table_number ? `TABLE ${table_number}`:'PICKUP ONLY'}
 			</h6>
-			<h6 className='mx-4 my-3'>Pickup Time</h6>
+			<h6 className='mx-4 my-3'>{table_number ? null :'Pickup Time'}</h6>
 			<div className='mx-4'>
-				<LocalizationProvider
+				{table_number ? null :<LocalizationProvider
 					dateAdapter={AdapterDateFns}
 				>
 					<Stack spacing={3}>
@@ -59,7 +59,7 @@ export default function OrderBasket() {
 							)}
 						/>
 					</Stack>
-				</LocalizationProvider>
+				</LocalizationProvider>}
 
 				<BasketItem deleteIcon={true}/>
 				<div className='my-3'>
@@ -67,9 +67,9 @@ export default function OrderBasket() {
 				</div>
 				<Link
 					className='d-block mx-auto my-4 text-center'
-					to={pickupTime ? '/checkout':'/Menu'}
+					to={pickupTime || (!pickupTime && table_number) ? '/checkout':'/Menu'}
 				>
-					<Button className='btn btn-lg text-white' disabled={!pickupTime}>ORDER FOR PICKUP NOW!</Button>
+					<Button className='btn btn-lg text-white' disabled={!table_number &&!pickupTime}>{table_number ?'ORDER NOW!':'ORDER FOR PICKUP NOW!'}</Button>
 				</Link>
 			</div>
 		</div>

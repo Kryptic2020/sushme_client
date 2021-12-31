@@ -10,13 +10,14 @@ import locked from '../img/locked.png';
 export default function Contact() {
 	//State management
 	const { store } = useGlobalState();
-	const { basket, pickupTime } = store;
+	const { basket, pickupTime, table_number } = store;
 	const initialFormState = {
 		username: '',
 		email: '',
 		phone: '',
 		basket,
 		pickupTime,
+		table_number
 	};
 
 	const [formState, setFormState] = useState(
@@ -70,7 +71,7 @@ export default function Contact() {
 					<input
 						type='text'
 						name='username'
-						className='bg-light border height'
+						className='bg-light border height py-3'
 						placeholder='Customer name'
 						value={formState.username}
 						onChange={handleChange}
@@ -80,7 +81,7 @@ export default function Contact() {
 					<input
 						type='email'
 						name='email'
-						className='bg-light border height'
+						className='bg-light border height py-3'
 						placeholder='Email'
 						value={formState.email}
 						onChange={handleChange}
@@ -90,7 +91,7 @@ export default function Contact() {
 					<input
 						type='number'
 						name='phone'
-						className='bg-light border height'
+						className='bg-light border height py-3'
 						placeholder='Phone'
 						value={formState.phone}
 						onChange={handleChange}
@@ -112,7 +113,7 @@ export default function Contact() {
 						formState.username.length < 3 ||
 						formState.phone.length < 9 ||
 						!basket ||
-						!pickupTime
+						(!pickupTime && !table_number)
 					}
 					onClick={handleCkeckout}
 				>

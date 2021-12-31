@@ -19,7 +19,7 @@ import StarIcon from '@mui/icons-material/Star';
 
 export default function Menu() {
 	const { store } = useGlobalState();
-	const { basket } = store;
+	const { basket, table_number } = store;
 	const [items, setItems] = useState([]);
 	const [show, setShow] = useState(false);
 
@@ -74,10 +74,10 @@ export default function Menu() {
 							/>
 							5.0
 						</span>
-						<span className='p-1 p-md-0  mx-md-4 my-lg-2'>
+						{table_number ? null : <span className='p-1 p-md-0  mx-md-4 my-lg-2'>
 							191 Adelaide St, Brisbane Qld
 							4000
-						</span>
+						</span>}
 					</div>
 				</MenuHeroBox>
 				<ImgMenuHero

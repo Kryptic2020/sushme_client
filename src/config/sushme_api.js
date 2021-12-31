@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const sushmeAPI = axios.create({
-  //baseURL: 'http://localhost:3000'
-  baseURL:'https://sushme-api.herokuapp.com'
+  baseURL: `${process.env.REACT_APP_URL}`
 })
 
 export default sushmeAPI;
