@@ -4,7 +4,7 @@ import { useGlobalState } from '../utils/stateContext';
 
 export default function OrderSummary() {
 	const {store } = useGlobalState();
-  const { basket,pickupTime } = store;
+  const { basket,pickupTime, table_number } = store;
   
 	function total() {
 		let sum = 0;
@@ -17,12 +17,12 @@ export default function OrderSummary() {
 		<div className='my-5 col-12 col-md-6'>
 			<h3 className='m-4'>ORDER SUMMARY</h3>
 			<h6 className='text-center'>
-				Preorder for {pickupTime ? pickupTime.toLocaleString() : '11:00 AM'}.
+				Preorder for {pickupTime ? pickupTime.toLocaleString() : null}
 			</h6>
 			<h6 className='text-center text-danger fw-bold my-5'>
-				PICKUP ONLY
+				{table_number ? `TABLE ${table_number}`:'PICKUP ONLY'}
 			</h6>
-			<h6 className='mx-4 my-3'>Pickup Time</h6>
+			{/* <h6 className='mx-4 my-3'>Pickup Time</h6> */}
 			<div className='mx-4'>
 			
 				<BasketItem deleteIcon={false}/>

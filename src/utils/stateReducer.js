@@ -18,6 +18,12 @@ export default function reducer(state, action) {
 				userEmail: action.data,
 			};
 		}
+			case 'setTableNumber': {
+			return {
+				...state,
+				table_number: action.data,
+			};
+		}
 			case 'setPickupTime': {
 			return {
 				...state,
