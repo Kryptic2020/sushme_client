@@ -9,6 +9,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import ProductForm from './ProductForm';
 import { Modal } from 'react-bootstrap';
 import { categoryIndex } from '../services/categoryServices';
+import { Link } from 'react-router-dom';
 
 export default function Product() {
 	const [show, setShow] = useState(false);
@@ -85,9 +86,10 @@ export default function Product() {
 	}, [show, idState, modalUpdateProduct]);
 
 	return (
-		<div>
+		<div className='bg-light'>
+			<Link className='m-5' to={'/dashboard'}> back to Dashboard</Link>
 			<h5
-				className='m-5 bg-light rounded p-3 col-md-4'
+				className='m-5 bg-white rounded p-3 col-md-4'
 				onClick={handleModal}
 			>
 				<AddCircleOutlineIcon /> Add Product
@@ -96,12 +98,12 @@ export default function Product() {
 			{ModalCreateProduct}
 			{ModalUpdateProduct}
 
-			<h3 className='m-5 text-white'>Product List</h3>
+			<h3 className='m-5 text-dark'>Product List</h3>
 			{productsState.length > 0 &&
 				productsState.map((el, index) => (
 					<div
 						key={index}
-						className='col col-lg-6 bg-light m-5 rounded d-md-flex flex-row-reverse'
+						className='col col-lg-6 bg-white m-5 rounded d-md-flex flex-row-reverse'
 					>
 						<div className='col-12 col-md-6 m-0 p-0'><img className='w-100 h100 m-0 p-0' src={el.picture} alt={el.title}/></div>
 						<div className='col-12 col-md-6 p-4'>
@@ -121,19 +123,19 @@ export default function Product() {
 							<p className='py-3'>Quantity: {el.quantity}</p>
 						
 						
-						<span className='p-3 border rounded'>
+						<span className='p-2 border rounded text-primary'>
 							<CreateIcon
 								onClick={() => {
 									handleUpdate(el.id);
 								}}
-							/>{' '}
+							/>{' Update '}
 						</span>
-						<span className='mx-3 p-3 border rounded'>
+						<span className='mx-3 p-2 border rounded text-danger bg-light'>
 							<DeleteIcon
 								onClick={() => {
 									handleDelete(el.id);
 								}}
-							/>{' '}
+							/>{' Delete '}
 							</span>
 								</div>
 					</div>

@@ -11,7 +11,7 @@ export default function Home() {
   const [topSellers,setTopSellers]= useState([])
 
 useEffect(() => {
-  productsTopSeller().then((data) => { setTopSellers(data.products); console.log(data)})
+  productsTopSeller().then((data) => { setTopSellers(data.products)})
 }, [])
   return (
     <div className='w-100'>      
@@ -27,8 +27,9 @@ useEffect(() => {
           <p className='p-4 py-lg-5'>Order Online from Sushme Japanese Cuisine * 191 Adelaide St, Brisbane QLD 4000 * Online Menu * Takeaway * Secure Online Payments *</p>  
           <section className='d-none d-lg-block mx-4'>
             <h5>Top Sellers</h5>
+            <div className='d-flex'>
             {topSellers.length > 0 && topSellers.map((el, index) => (el != null ?
-              <div className='d-flex rounded col-12 my-5' key={index}>
+              <div className='d-flex rounded col-12 col-lg-6 my-5' key={index}>
               <ImgTopSeller src={el.picture } alt={ el.title} />
                <div className='col d-flex flex-column justify-content-around'>
                   <span className='mx-3 text-muted'><strong>{el.title}</strong></span>
@@ -37,7 +38,7 @@ useEffect(() => {
                 </div>
                 
             </div>:null
-            ))}
+            ))}</div>
             
             </section>
         </section>

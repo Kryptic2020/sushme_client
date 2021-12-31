@@ -160,7 +160,7 @@ margin:auto;
 @media (min-width: 1024px) {
   padding:64px 94px 64px 94px;
   width:50%;
-  height:911.27px;
+  height:40%;
 }
 `
 

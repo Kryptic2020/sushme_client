@@ -18,11 +18,16 @@ import Header from './Header';
 import Footer from './Footer';
 import { Div } from './Styled';
 import Menu from './Menu';
+import Checkout from './Checkout';
+import Receipt from './Receipt';
+import Product from './Product';
+import Order from './Order';
 
 function App() {
 	//State management
 	const initialState = {
-		basket:[],
+		basket: [],
+		pickupTime:null,
 		user_id: sessionStorage.getItem('userId') || null,
 		userEmail: sessionStorage.getItem('email') || null,
 		loggedInUser:
@@ -65,6 +70,16 @@ function App() {
 							exact
 							path='/menu'
 							component={Menu}
+							></Route>
+							<Route
+							exact
+							path='/checkout'
+							component={Checkout}
+							></Route>
+								<Route
+							exact
+							path='/receipt/:order'
+							component={Receipt}
 						></Route>
 						<Route
 							exact
@@ -90,7 +105,18 @@ function App() {
 							exact
 							path='/dashboard'
 							component={Dashboard}
-						></Route>	: null}					
+							></Route> : null}	
+							{loggedInUser ? <Route
+							exact
+							path='/dashboard/products'
+							component={Product}
+							></Route> : null}	
+							{loggedInUser ? <Route
+							exact
+							path='/dashboard/orders'
+							component={Order}
+							></Route> : null}
+							
 					</Switch>
 					
 				</BrowserRouter>
